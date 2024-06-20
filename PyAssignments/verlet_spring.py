@@ -15,18 +15,20 @@ t_array = np.arange(0, t_max, dt)
 # initialise empty lists to record trajectories
 x_list = []
 v_list = []
-
-# Euler integration
-for t in t_array:
+# Verlet integration
+for i in range(len(t_array)):
 
     # append current state to trajectories
     x_list.append(x)
     v_list.append(v)
 
     # calculate new position and velocity
-    a = -k * x / m
-    x = x + dt * v
-    v = v + dt * a
+    if i > 0:
+        a = -k * x / m
+        x = 2*x - x_list[i-1] + ((dt)**2) * a 
+        v = (1/dt) * (x - x_list[i])
+    else:
+        x = v*dt
 
 # convert trajectory lists into arrays, so they can be sliced (useful for Assignment 2)
 x_array = np.array(x_list)
