@@ -8,27 +8,25 @@ x = 0
 v = 1
 
 # simulation time, timestep and time
-t_max = 1000
-dt = 1.01
+t_max = 100
+dt = 0.1
 t_array = np.arange(0, t_max, dt)
 
 # initialise empty lists to record trajectories
 x_list = []
 v_list = []
-# Verlet integration
-for i in range(len(t_array)):
+
+# Euler integration
+for t in t_array:
 
     # append current state to trajectories
     x_list.append(x)
     v_list.append(v)
 
     # calculate new position and velocity
-    if i > 0:
-        a = -k * x / m
-        x = 2*x - x_list[i-1] + ((dt)**2) * a 
-        v = (1/dt) * (x - x_list[i])
-    else:
-        x = v*dt
+    a = -k * x / m
+    x = x + dt * v
+    v = v + dt * a
 
 # convert trajectory lists into arrays, so they can be sliced (useful for Assignment 2)
 x_array = np.array(x_list)
