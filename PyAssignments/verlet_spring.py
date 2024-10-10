@@ -9,7 +9,7 @@ v = 1
 
 # simulation time, timestep and time
 t_max = 1000
-dt = 1.01
+dt = 1.0001 
 t_array = np.arange(0, t_max, dt)
 
 # initialise empty lists to record trajectories
